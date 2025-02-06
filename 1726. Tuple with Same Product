@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int tupleSameProduct(vector<int>& nums) {
+    
+    unordered_map<int, int> product_map;
+    int count = 0;
+    int n = nums.size();
+
+    // Generate all pairs and count product occurrences
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int product = nums[i] * nums[j];
+            count += 8 * product_map[product]; // Each previous occurrence forms 8 new valid tuples
+            product_map[product]++;
+        }
+    }
+    
+    return count;
+}
+
+ 
+    
+};

@@ -1,0 +1,34 @@
+/*class Solution {
+public:
+    long long countBadPairs(vector<int>& nums) {
+        int count=0;
+        for(int i=0;i<nums.size();i++){
+            for(int j=i+1;j<nums.size();j++){
+                if(j-i != nums[j]-nums[i]){
+                    count++;
+                }
+               
+
+            }
+        }
+        return count;
+    }
+};
+*/ T.C =O(N^2)//
+
+class Solution {
+public:
+long long countBadPairs(std::vector<int>& nums) {
+        unordered_map<int, long long> freq;
+        long long goodPairs = 0, n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            int diff = nums[i] - i;
+            goodPairs += freq[diff]; // Add previous occurrences of diff
+            freq[diff]++;            // Update frequency count
+        }
+
+        long long totalPairs = (n * (n - 1)) / 2;
+        return totalPairs - goodPairs; // Bad pairs = Total - Good
+    }
+};//T.C=O(N)

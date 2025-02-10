@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string clearDigits(string s) {
+      stack<char> st;  // Stack to store non-digit characters
+    
+    for (char c : s) {
+        if (isdigit(c)) {
+            if (!st.empty()) {
+                st.pop();  // Remove the closest non-digit character
+            }
+        } else {
+            st.push(c);  // Store non-digit character
+        }
+    }
+    
+    // Construct the result from the stack
+    string result;
+    while (!st.empty()) {
+        result = st.top() + result;  // Reverse order
+        st.pop();
+    }
+    
+    return result;  
+    }
+};

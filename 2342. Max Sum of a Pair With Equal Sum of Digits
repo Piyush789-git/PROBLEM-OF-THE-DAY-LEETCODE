@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int maximumSum(vector<int>& nums) {
+        auto digitSum = [](int n) {
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    };
+
+    unordered_map<int, int> digitMap;
+    int max_sum = -1;
+
+    for (int num : nums) {
+        int dsum = digitSum(num);
+
+        if (digitMap.count(dsum)) {
+            max_sum = max(max_sum, digitMap[dsum] + num);
+        }
+
+        digitMap[dsum] = max(digitMap[dsum], num);
+    }
+
+    return max_sum;
+
+    }
+};

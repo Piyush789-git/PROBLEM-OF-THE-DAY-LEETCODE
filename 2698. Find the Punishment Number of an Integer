@@ -1,0 +1,34 @@
+class Solution {
+public:
+bool isValidPartition(string s, int target, int index, int currentSum) {
+    if (index == s.length()) {
+        return currentSum == target;
+    }
+
+    int num = 0;
+    for (int i = index; i < s.length(); i++) {
+        num = num * 10 + (s[i] - '0');
+        if (isValidPartition(s, target, i + 1, currentSum + num)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+    int punishmentNumber(int n) {
+        int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        int square = i * i;
+        string squareStr = to_string(square);
+        
+        // Check if the square of i can be partitioned to sum to i
+        if (isValidPartition(squareStr, i, 0, 0)) {
+            sum += square;
+        }
+    }
+    return sum;
+}
+    
+};

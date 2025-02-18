@@ -1,0 +1,23 @@
+class Solution {
+public:
+ int backtrack(unordered_map<char, int>& freq) {
+        int count = 0;
+        for (auto& [tile, countVal] : freq) {
+            if (countVal > 0) {
+                freq[tile]--;  // Use the tile
+                count += 1 + backtrack(freq); // Count the current sequence and recurse
+                freq[tile]++;  // Backtrack (restore count)
+            }
+        }
+        return count;
+    }
+
+    int numTilePossibilities(string tiles) {
+        unordered_map<char, int> freq;
+        for (char c : tiles) freq[c]++;  // Count frequency of each tile
+        
+        return backtrack(freq);
+    
+        
+    }
+};
